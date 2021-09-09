@@ -1,0 +1,26 @@
+# maven
+*/target/
+
+# intellij
+.idea/
+*.iml
+
+# netbeans
+nbproject/
+build/
+nbbuild/
+dist/
+nbdist/
+
+# python
+*.pyc
+__pycache__
+.ipynb_checkpoints
+
+# kdiff3
+*.orig
+
+# spinlab
+spinlab.pref
+spinlab.prop
+process-gradient-correction/src/main/jupyter/
