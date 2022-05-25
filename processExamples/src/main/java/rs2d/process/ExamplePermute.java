@@ -7,7 +7,7 @@ import rs2d.spinlab.plugins.process.ProcessPluginAbstract;
 import rs2d.spinlab.tools.param.*;
 
 
-public class Permute extends ProcessPluginAbstract {
+public class ExamplePermute extends ProcessPluginAbstract {
 
     private static final int DEFAULT_1ST_DIMENSION = 0;
     private static final int DEFAULT_2ND_DIMENSION = 3;
@@ -15,11 +15,11 @@ public class Permute extends ProcessPluginAbstract {
     // Constructors
     //
 
-    public Permute() {
+    public ExamplePermute() {
         super("Permute", "Permute two dimensions of the current dataset");
     }
 
-    public Permute(DataSetInterface dataset) {
+    public ExamplePermute(DataSetInterface dataset) {
         this();
         this.setDataset(dataset);
     }
@@ -92,9 +92,9 @@ public class Permute extends ProcessPluginAbstract {
             header.putParam(new DefaultParams().getParam(DefaultParams.PHASE_1));
         }
 
-        Permute.permuteParameters(header.getListNumberParam(DefaultParams.STATE), iDim);
-        Permute.permuteParameters(header.getListNumberParam(DefaultParams.PHASE_0), iDim);
-        Permute.permuteParameters(header.getListNumberParam(DefaultParams.PHASE_1), iDim);
+        ExamplePermute.permuteParameters(header.getListNumberParam(DefaultParams.STATE), iDim);
+        ExamplePermute.permuteParameters(header.getListNumberParam(DefaultParams.PHASE_0), iDim);
+        ExamplePermute.permuteParameters(header.getListNumberParam(DefaultParams.PHASE_1), iDim);
 
         header.getParam(DefaultParams.MATRIX_DIMENSION_4D).setValue(matrix[iDim[3]]);
         header.getParam(DefaultParams.MATRIX_DIMENSION_3D).setValue(matrix[iDim[2]]);

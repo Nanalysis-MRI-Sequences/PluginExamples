@@ -8,12 +8,12 @@ import rs2d.spinlab.tools.utility.MathUtility;
 
 import java.util.ArrayList;
 
-public class BC extends ProcessPluginAbstract {
+public class ExampleBC extends ProcessPluginAbstract {
     //
     // Constructors
     //
 
-    public BC() {
+    public ExampleBC() {
         super("BC", "FID baseline correction");
     }
 

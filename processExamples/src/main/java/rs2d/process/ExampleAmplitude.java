@@ -9,16 +9,16 @@ import rs2d.spinlab.tools.param.BooleanParam;
 import rs2d.spinlab.tools.param.DefaultParams;
 import rs2d.spinlab.tools.param.Param;
 
-public class Amplitude extends ProcessPluginAbstract {
+public class ExampleAmplitude extends ProcessPluginAbstract {
     //
     // Constructors
     //
 
-    public Amplitude() {
+    public ExampleAmplitude() {
         super("Amplitude", "Compute the amplitude");
     }
 
-    public Amplitude(DataSetInterface dataset) {
+    public ExampleAmplitude(DataSetInterface dataset) {
         this();
         this.setDataset(dataset);
     }

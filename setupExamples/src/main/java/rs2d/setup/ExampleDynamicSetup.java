@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-public class DynamicSetup extends SetUpPluginAbstract {
+public class ExampleDynamicSetup extends SetUpPluginAbstract {
     private static final List<String> MANDATORY_PARAMS = Arrays.asList(
             MriDefaultParams.DYNAMIC_SEQUENCE.name(), "USER_PARTIAL_SLICE", "USER_PARTIAL_PHASE");
 

@@ -12,7 +12,7 @@ import java.util.List;
  * @version 1.0, Created on 30 mars 2010
  * @since 1.0
  */
-public class Sequential2D extends TransformPluginAbstract {
+public class ExampleSequential2D extends TransformPluginAbstract {
 
     private static final String DESCRIPTION = "---------->----------\n"
             + "---------->----------\n"
@@ -32,7 +32,7 @@ public class Sequential2D extends TransformPluginAbstract {
     /**
      * The default constructor.
      */
-    public Sequential2D() {
+    public ExampleSequential2D() {
         super();
 
     }
@@ -203,6 +203,6 @@ public class Sequential2D extends TransformPluginAbstract {
         int acqu4D = mx4D;
 
         System.out.println("Sequential2D " + " Multiplanar " + multiplanar + " " + mx1D + "/" + mx2D + "/" + mx3D + "/" + mx4D + " Etl " + netl + " Nshoot " + nshoot);
-        TransformUtility.test(new Sequential2D(), mx1D, mx2D, mx3D, mx4D, netl, nshoot, multiplanar, acqu1D, acqu2D, acqu3D, acqu4D);
+        TransformUtility.test(new ExampleSequential2D(), mx1D, mx2D, mx3D, mx4D, netl, nshoot, multiplanar, acqu1D, acqu2D, acqu3D, acqu4D);
     }
 }

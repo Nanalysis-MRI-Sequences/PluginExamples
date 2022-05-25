@@ -10,12 +10,12 @@ import rs2d.spinlab.tools.param.TextParam;
 
 import java.io.*;
 
-public class SaveDataToFile extends ProcessPluginAbstract {
+public class ExampleSaveDataToFile extends ProcessPluginAbstract {
     //
     // Constructors
     //
 
-    public SaveDataToFile() {
+    public ExampleSaveDataToFile() {
         super("SaveDataToFile", "Save the data into a file");
     }
 
@@ -53,7 +53,7 @@ public class SaveDataToFile extends ProcessPluginAbstract {
             OutputStreamWriter writer = new OutputStreamWriter(buffer);
 
             for (int r = 0; r < receiversCount; r++) {
-                SaveDataToFile.writeDataToStream(writer, this.getDataset().getData(r));
+                ExampleSaveDataToFile.writeDataToStream(writer, this.getDataset().getData(r));
             }
 
             writer.flush();

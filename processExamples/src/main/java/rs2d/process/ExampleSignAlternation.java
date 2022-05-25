@@ -7,16 +7,16 @@ import rs2d.spinlab.plugins.process.ProcessPluginAbstract;
 import rs2d.spinlab.tools.param.MriDefaultParams;
 import rs2d.spinlab.tools.param.Param;
 
-public class SignAlternation extends ProcessPluginAbstract {
+public class ExampleSignAlternation extends ProcessPluginAbstract {
     //
     // Constructors
     //
 
-    public SignAlternation() {
+    public ExampleSignAlternation() {
         super("SignAlternation", "SignAlternation of data");
     }
 
-    public SignAlternation(DataSetInterface dataset) {
+    public ExampleSignAlternation(DataSetInterface dataset) {
         this();
         this.setDataset(dataset);
     }

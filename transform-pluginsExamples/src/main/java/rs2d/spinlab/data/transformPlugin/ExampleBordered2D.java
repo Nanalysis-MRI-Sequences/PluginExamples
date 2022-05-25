@@ -19,7 +19,7 @@ import java.util.List;
  * @version 1.0, Created on 26 sept 2011
  * @since 1.0
  */
-public class Bordered2D extends TransformPluginAbstract {
+public class ExampleBordered2D extends TransformPluginAbstract {
 
 //    public final static String FIRST_ECHO_POSITION = "FIRST_ECHO_POSITION";
 //    public final static String POSTION_CENTER = "center";
@@ -37,7 +37,7 @@ public class Bordered2D extends TransformPluginAbstract {
     /**
      * The default constructor.
      */
-    public Bordered2D() {
+    public ExampleBordered2D() {
         super();
 
     }
@@ -208,7 +208,7 @@ public class Bordered2D extends TransformPluginAbstract {
         int acqu4D = mx4D;
 
         System.out.println("Borderer2D " + " Multiplanar " + multiplanar + " " + mx1D + "/" + mx2D + "/" + mx3D + "/" + mx4D + " Etl " + netl + " Nshoot " + nshoot);
-        TransformUtility.test(new Bordered2D(), mx1D, mx2D, mx3D, mx4D, netl, nshoot, multiplanar, acqu1D, acqu2D, acqu3D, acqu4D);
+        TransformUtility.test(new ExampleBordered2D(), mx1D, mx2D, mx3D, mx4D, netl, nshoot, multiplanar, acqu1D, acqu2D, acqu3D, acqu4D);
     }
 
     public int getSignificantEcho() {

@@ -16,7 +16,7 @@ import java.util.List;
  * @version 1.0, Created on 30 mars 2010
  * @since 1.0
  */
-public class Sequential4D extends TransformPluginAbstract {
+public class ExampleSequential4D extends TransformPluginAbstract {
 
     final static int JUMP_SIZE = 2;//marche qu'avec 2 ne pas changer pour l'instant
 
@@ -152,6 +152,6 @@ public class Sequential4D extends TransformPluginAbstract {
         int acqu4D = mx4D / netl;
 
         System.out.println("Sequential4D " + " Multiplanar " + multiplanar + " " + mx1D + "/" + mx2D + "/" + mx3D + "/" + mx4D + " Etl " + netl + " Nshoot " + nshoot);
-        TransformUtility.test(new Sequential4D(), mx1D, mx2D, mx3D, mx4D, netl, nshoot, multiplanar, acqu1D, acqu2D, acqu3D, acqu4D);
+        TransformUtility.test(new ExampleSequential4D(), mx1D, mx2D, mx3D, mx4D, netl, nshoot, multiplanar, acqu1D, acqu2D, acqu3D, acqu4D);
     }
 }

@@ -19,7 +19,7 @@ import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 
-public class RunWithVariableParameter extends SetUpPluginAbstract {
+public class ExampleRunWithVariableParameter extends SetUpPluginAbstract {
     private TextParam parameterName = new TextParam("UserParameter Name",
             DefaultParams.RECEIVER_GAIN.name(), "Parameter to be tested (single value parameter)");
 
@@ -30,7 +30,7 @@ public class RunWithVariableParameter extends SetUpPluginAbstract {
     //
     // Construction
     //
-    public RunWithVariableParameter() {
+    public ExampleRunWithVariableParameter() {
         super("RunWithVariableParameter", "repeat acquisition by changing a UserParameter value ( only NumberParam are accepted)");
     }
 

@@ -6,7 +6,7 @@ import rs2d.spinlab.data.Header;
 import rs2d.spinlab.plugins.process.ProcessPluginAbstract;
 import rs2d.spinlab.tools.param.*;
 
-public class ZF extends ProcessPluginAbstract {
+public class ExampleZF extends ProcessPluginAbstract {
     private static final int DEFAULT_RECONSTRUCTION_SIZE = 512;
     private static final boolean DEFAULT_SYMMETRIC = false;
 
@@ -14,11 +14,11 @@ public class ZF extends ProcessPluginAbstract {
     // Construction
     //
 
-    public ZF() {
+    public ExampleZF() {
         super("ZF", "Add zero at the data end to fit the specified size(value or linked to a UserParam)");
     }
 
-    public ZF(DataSetInterface dataset) {
+    public ExampleZF(DataSetInterface dataset) {
         this();
         this.setDataset(dataset);
     }
@@ -75,7 +75,7 @@ public class ZF extends ProcessPluginAbstract {
 
         if (reconstructionSize >= initialSize) {
             int offset = isSymmetric ? (reconstructionSize - initialSize) / 2 : 0;
-            dataset.getData().forEach(data -> ZF.zeroFilling(data, offset, initialSize, reconstructionSize));
+            dataset.getData().forEach(data -> ExampleZF.zeroFilling(data, offset, initialSize, reconstructionSize));
             header.getNumberParam(DefaultParams.MATRIX_DIMENSION_1D).setValue(reconstructionSize);
         }
     }

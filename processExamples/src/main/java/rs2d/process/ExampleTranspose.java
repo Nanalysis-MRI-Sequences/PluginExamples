@@ -11,7 +11,7 @@ import rs2d.spinlab.tools.utility.MathUtility;
 
 import java.util.Arrays;
 
-public class Transpose extends ProcessPluginAbstract {
+public class ExampleTranspose extends ProcessPluginAbstract {
     public static final String DIRECT = "Direct";
     public static final String INDIRECT = "Indirect";
 
@@ -19,11 +19,11 @@ public class Transpose extends ProcessPluginAbstract {
     // Constructors
     //
 
-    public Transpose() {
+    public ExampleTranspose() {
         super("Transpose", "Transpose the current dataset");
     }
 
-    public Transpose(DataSetInterface dataset) {
+    public ExampleTranspose(DataSetInterface dataset) {
         this();
         this.setDataset(dataset);
     }
@@ -34,8 +34,8 @@ public class Transpose extends ProcessPluginAbstract {
 
     @Override
     public Param[] getParam() {
-        TextParam transposeOrder = new TextParam("Transpose Order", Transpose.DIRECT, "The order of the transposition");
-        transposeOrder.setSuggestedValues(Arrays.asList(Transpose.DIRECT, Transpose.INDIRECT));
+        TextParam transposeOrder = new TextParam("Transpose Order", ExampleTranspose.DIRECT, "The order of the transposition");
+        transposeOrder.setSuggestedValues(Arrays.asList(ExampleTranspose.DIRECT, ExampleTranspose.INDIRECT));
         transposeOrder.setRestrictedToSuggested(true);
         return new Param[]{transposeOrder};
     }
@@ -44,7 +44,7 @@ public class Transpose extends ProcessPluginAbstract {
     public Param[] execute(Param... params) {
         this.checkParameters(params);
         String directDim = (String) params[0].getValue();
-        this.executeTranspose(directDim.equals(Transpose.DIRECT));
+        this.executeTranspose(directDim.equals(ExampleTranspose.DIRECT));
         return new Param[0];
     }
 
@@ -72,9 +72,9 @@ public class Transpose extends ProcessPluginAbstract {
             header.putParam(new DefaultParams().getParam(DefaultParams.PHASE_1));
         }
 
-        Transpose.transposeParameters(header.getListNumberParam(DefaultParams.STATE), direct);
-        Transpose.transposeParameters(header.getListNumberParam(DefaultParams.PHASE_0), direct);
-        Transpose.transposeParameters(header.getListNumberParam(DefaultParams.PHASE_1), direct);
+        ExampleTranspose.transposeParameters(header.getListNumberParam(DefaultParams.STATE), direct);
+        ExampleTranspose.transposeParameters(header.getListNumberParam(DefaultParams.PHASE_0), direct);
+        ExampleTranspose.transposeParameters(header.getListNumberParam(DefaultParams.PHASE_1), direct);
 
         if (direct) {
             header.getParam(DefaultParams.MATRIX_DIMENSION_3D).setValue(matrix1D);
