@@ -11,7 +11,7 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>ISO-8859-15</project.build.sourceEncoding>
-        <spinlab.version>2021.06.2</spinlab.version>
+        <spinlab.version>2021.12.2</spinlab.version>
     </properties>
     <dependencies>
         <dependency>
