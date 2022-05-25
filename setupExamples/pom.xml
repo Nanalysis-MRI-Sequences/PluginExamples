@@ -12,12 +12,6 @@
     <artifactId>setupExamples</artifactId>
     <version>${spinlab.version}</version>
     <packaging>jar</packaging>
-	
-    <dependencies>
-        <dependency>
-            <groupId>rs2d</groupId>
-            <artifactId>spinlab</artifactId>
-            <version>${spinlab.version}</version>
-        </dependency>
-    </dependencies>
+
+
 </project>

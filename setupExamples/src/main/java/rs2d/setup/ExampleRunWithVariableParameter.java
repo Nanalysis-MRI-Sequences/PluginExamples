@@ -1,5 +1,14 @@
 package rs2d.setup;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.concurrent.Callable;
+import java.util.stream.Collectors;
+
 import rs2d.commons.log.Log;
 import rs2d.commons.xml.XmlSerializer;
 import rs2d.spinlab.application.Application;
@@ -13,38 +22,33 @@ import rs2d.spinlab.tools.param.exception.ParamsExceptionSolver;
 import rs2d.spinlab.tools.param.exception.UncompatibleParam;
 import rs2d.spinlab.tools.utility.Step;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
-import java.util.concurrent.Callable;
-import java.util.stream.Collectors;
+
 
 public class ExampleRunWithVariableParameter extends SetUpPluginAbstract {
     private TextParam parameterName = new TextParam("UserParameter Name",
-            DefaultParams.RECEIVER_GAIN.name(), "Parameter to be tested (single value parameter)");
+        DefaultParams.RECEIVER_GAIN.name(), "Parameter to be tested (single value parameter)");
 
-    private ListNumberParam parameterValues = new ListNumberParam("Values", Collections.emptyList()
-            , NumberEnum.Double, "Values of the parameter to be tested");
+    private ListNumberParam parameterValues =
+        new ListNumberParam("Values", Collections.emptyList(), NumberEnum.Double, "Values of the parameter to be tested");
 
 
     //
     // Construction
     //
     public ExampleRunWithVariableParameter() {
-        super("RunWithVariableParameter", "repeat acquisition by changing a UserParameter value ( only NumberParam are accepted)");
+        super("ExampleRunWithVariableParameter", "repeat acquisition by changing a UserParameter value ( only NumberParam are accepted)");
     }
 
     @Override
     public Param[] getParam() {
         MriDefaultParams defaultParams = new MriDefaultParams();
         List<String> suggestedValues = defaultParams.values().stream()
-                .map(ParamDescription::name)
-                .filter(description -> defaultParams.getParam(description) instanceof NumberParam)
-                .collect(Collectors.toList());
-        System.out.println(userParams);
+            .map(ParamDescription::name)
+            .filter(description -> defaultParams.getParam(description) instanceof NumberParam)
+            .collect(Collectors.toList());
         parameterName.setSuggestedValues(suggestedValues);
 
-        return new Param[]{parameterName, parameterValues};
+        return new Param[] {parameterName, parameterValues};
     }
 
     @Override
@@ -72,18 +76,19 @@ public class ExampleRunWithVariableParameter extends SetUpPluginAbstract {
         if (!library.contains(parameterName)) {
             serie.setCurrentStep(Step.Error);
             Log.error(getClass(),
-                    "The parameter named %s  is not present!", parameterName);
+                "The parameter named %s  is not present!", parameterName);
             System.out.println(" The parameter named " + parameterName + " is not present! ");
             return null;
-        } else if (!((library.getParam(parameterName).getType().compareTo("NumberParam") == 0) || (library.getParam(parameterName).getType().compareTo("listNumberParam") == 0))) {
+        } else if (!((library.getParam(parameterName).getType().compareTo("NumberParam") == 0)
+            || (library.getParam(parameterName).getType().compareTo("listNumberParam") == 0))) {
             System.out.println(parameterName + "  - " + library.getParam(parameterName).getType());
             serie.setCurrentStep(Step.Error);
             Log.error(getClass(),
-                    "The parameter named %s  is not a single value parameter!", parameterName);
+                "The parameter named %s  is not a single value parameter!", parameterName);
             System.out.println(" The parameter named " + parameterName + " is not a single value parameter! ");
             return null;
-//            throw new ParameterNotFoundException(String.format(
-//                    "The parameter named %s  is not a single value parameter!", parameterName));
+            // throw new ParameterNotFoundException(String.format(
+            // "The parameter named %s is not a single value parameter!", parameterName));
         }
 
 
@@ -105,7 +110,9 @@ public class ExampleRunWithVariableParameter extends SetUpPluginAbstract {
         int size4DAcqui = library.getNumberParam(NmrDefaultParams.ACQUISITION_MATRIX_DIMENSION_4D).intValue();
         int size4D = size4DAcqui * nbAquisition;
         int sizeRec = library.getNumberParam(NmrDefaultParams.RECEIVER_COUNT).intValue();
-        ModalityEnum modalityMRI = library.getTextParam(NmrDefaultParams.MODALITY).getValue().compareToIgnoreCase(ModalityEnum.MRI.name()) == 0 ? ModalityEnum.MRI : ModalityEnum.NMR;
+        ModalityEnum modalityMRI =
+            library.getTextParam(NmrDefaultParams.MODALITY).getValue().compareToIgnoreCase(ModalityEnum.MRI.name()) == 0 ? ModalityEnum.MRI
+                : ModalityEnum.NMR;
 
         DataSetInterface signalDataset = new DataSet(size1D, size2D, size3D, size4D, sizeRec, modalityMRI);
 
@@ -124,13 +131,13 @@ public class ExampleRunWithVariableParameter extends SetUpPluginAbstract {
             System.out.println("");
             System.out.println("iter " + iter + "   - " + parameterName + "  = " + parameterValues.get(iter).doubleValue());
             System.out.println("");
-            //      System.out.println(Distrib.getInstance().getAcquisitionManager().getSequence().getUserParams());
+            // System.out.println(Distrib.getInstance().getAcquisitionManager().getSequence().getUserParams());
 
 
             setSequence(ApplicationAcqu.getUserParams());
             Distrib.getInstance().startSequencer(true);
 
-//            AcquisitionUtil.runApplication(ApplicationAcqu, ApplicationAcqu.getUserParams());
+            // AcquisitionUtil.runApplication(ApplicationAcqu, ApplicationAcqu.getUserParams());
             DataSetInterface dataset = Distrib.getInstance().getDataset();
 
             // save the data in signalDataset
@@ -142,7 +149,7 @@ public class ExampleRunWithVariableParameter extends SetUpPluginAbstract {
                         for (int j = 0; j < size2D; j++) {
                             for (int i = 0; i < size1D; i++) {
 
-//                                System.out.print("  copy " + rec +" "+ l +" "+ k +" "+ j + " "+i );
+                                // System.out.print(" copy " + rec +" "+ l +" "+ k +" "+ j + " "+i );
                                 float newDataReal = dataset.getData(rec).getRealElement(i, j, k, l);
                                 float newDataImag = dataset.getData(rec).getImaginaryElement(i, j, k, l);
                                 signalDataset.getData(rec).setData(newDataReal, newDataImag, i, j, k, lPos);
@@ -157,7 +164,7 @@ public class ExampleRunWithVariableParameter extends SetUpPluginAbstract {
             headerName += iter + ".xml";
             File headerFilelocation = new File(serie.getOutputDirectory(), headerName);
             (new XmlSerializer()).serialize(ApplicationAcqu.getUserParams(), headerFilelocation);
-//            (new XmlSerializer()).serialize(signalDataset.getHeader(), headerFilelocation); all with default parameter
+            // (new XmlSerializer()).serialize(signalDataset.getHeader(), headerFilelocation); all with default parameter
 
 
         }
@@ -165,15 +172,15 @@ public class ExampleRunWithVariableParameter extends SetUpPluginAbstract {
         // change size and SETUP_PARAMETER_NAME in the header of signalDataset
         library.getNumberParam(NmrDefaultParams.ACQUISITION_MATRIX_DIMENSION_4D).setValue(size4D);
         TextParam setupParameterName = new TextParam("SETUP_PARAMETER_NAME",
-                parameterName, "Parameter that did vary");
+            parameterName, "Parameter that did vary");
         ListNumberParam setupParameterValues = new ListNumberParam("SETUP_PARAMETER_VALUES",
-                parameterValues, libUPEnum, "Values of the parameter that did vary");
+            parameterValues, libUPEnum, "Values of the parameter that did vary");
 
         library.addParam(setupParameterName);
         library.addParam(setupParameterValues);
 
-        //add MATRIX_DIMENSION_1D
-        //System.out.println("   MATRIX_DIMENSION_1D  " + library.getNumberParam(NmrDefaultParams.MATRIX_DIMENSION_1D).getValue());
+        // add MATRIX_DIMENSION_1D
+        // System.out.println(" MATRIX_DIMENSION_1D " + library.getNumberParam(NmrDefaultParams.MATRIX_DIMENSION_1D).getValue());
         NumberParam matrix1D = (NumberParam) new DefaultParams().getParam(DefaultParams.MATRIX_DIMENSION_1D);
         matrix1D.setValue(size1D);
         library.addParam(setupParameterName);
@@ -208,17 +215,17 @@ public class ExampleRunWithVariableParameter extends SetUpPluginAbstract {
      * Calls Distrib.setSequence recursively to solve unreach/uncompatible params
      */
     private void setSequence(ParamLibrary paramLibrary) throws Exception {
-        //le bout de code qui sera exécuté
+        // code that will be run
         Callable<Void> callable = () -> {
             Distrib.getInstance().setSequence(sequenceGeneratorName, paramLibrary, null, true);
             return null;
         };
 
-        //appelle le callable récursivement, en changeant les userParams si nécessaire
+        // call the Callable recursively, changing user parameters if needed
         ParamsExceptionSolver<Void> solver = new ParamsExceptionSolver<>(callable);
         solver.execute(paramLibrary);
 
-        //affiche les params modifiés
+        // logs changed parameters
         for (UncompatibleParam param : solver.getChangedParameters()) {
             Log.debug(getClass(), "changed param: " + param);
         }
